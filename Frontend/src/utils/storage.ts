@@ -1,0 +1,13 @@
+export const STORAGE_KEYS = {
+  token: "krishivani_token",
+  currentUser: "krishivani_current_user",
+} as const;
+
+export const parseJson = <T>(value: string | null, fallback: T): T => {
+  if (!value) return fallback;
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return fallback;
+  }
+};

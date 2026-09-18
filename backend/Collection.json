@@ -1,0 +1,85 @@
+{
+  "info": {
+    "name": "KrishiVani API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/health"
+      }
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Ravi Patil\",\n  \"email\": \"ravi@example.com\",\n  \"password\": \"secret123\",\n  \"state\": \"Maharashtra\",\n  \"pin_code\": \"411001\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/register"
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"ravi@example.com\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/auth/login"
+      }
+    },
+    {
+      "name": "Current User",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/api/v1/auth/me"
+      }
+    },
+    {
+      "name": "Crops",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/data/crops?season=Kharif&state=Maharashtra"
+      }
+    },
+    {
+      "name": "Schemes",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/data/schemes"
+      }
+    },
+    {
+      "name": "Market Prices",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/data/market-prices"
+      }
+    },
+    {
+      "name": "Weather By Pin",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/weather/pincode/411001"
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000" },
+    { "key": "token", "value": "" }
+  ]
+}
