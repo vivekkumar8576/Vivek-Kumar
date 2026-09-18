@@ -8,6 +8,7 @@ load_dotenv()
 class Settings(BaseModel):
     app_name: str = "KrishiVani API"
     api_prefix: str = "/api/v1"
+    database_url_env: str = os.getenv("DATABASE_URL", "")
     secret_key: str = os.getenv("SECRET_KEY", "change-me-in-production")
     algorithm: str = "HS256"
     access_token_expire_minutes: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "120"))
@@ -21,6 +22,13 @@ class Settings(BaseModel):
     @property
     def database_url(self) -> str:
         from urllib.parse import quote_plus
+
+        if self.database_url_env:
+            return self.database_url_env
+
+        if not os.getenv("MYSQL_HOST"):
+            return "sqlite:///./krishivani.db"
+
         encoded_password = quote_plus(self.mysql_password)
         return (
             f"mysql+pymysql://{self.mysql_user}:{encoded_password}"
